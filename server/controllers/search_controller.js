@@ -3,23 +3,13 @@ const swag = require('../models/swag');
 module.exports = {
     search: (req, res, next) => {
         const {category} = req.query;
-        if(!category){
+        const items = swag.filter(swag => swag.category == category);
+        if(!items){
             res.status(200).send(swag)
         } else {
-            const cat = swag.filter(swag => swag.category === category);
-            res.status(200).send(cat)
+            res.status(200).send(items)
         }
     }
-    }
-
-
-
-// const cat = swag.find(swag => swag.category == category);
-// if(cat === undefined){
-//     res.status(200).send(swag)
-// } else {
-//     for(i=0; i< swag.length; i++){
-//         if(swag[i].category == category)
-//     res.status(200).send(swag[i])
+}
 
 
